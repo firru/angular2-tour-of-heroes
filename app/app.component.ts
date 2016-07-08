@@ -6,14 +6,8 @@ import { HeroService }     from './hero.service';
 import {ROUTER_DIRECTIVES} from "@angular/router";
 @Component({
     selector: 'my-app',
-    template: `
-    <h1>{{title}}</h1>
-    <nav>
-        <a [routerLink]="['/dashboard']">Dashboard</a>
-        <a [routerLink]="['/heroes']">Heroes</a>
-    </nav>
-    <router-outlet></router-outlet>
-  `,
+    templateUrl: 'app/app.component.html',
+	styleUrls: ['app/app.component.css'],
     directives: [ROUTER_DIRECTIVES],
     providers: [
         HeroService

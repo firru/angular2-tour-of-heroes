@@ -1,20 +1,12 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {Hero} from './hero';
 import {HeroDetailComponent} from './hero-detail.component';
 import {HeroService} from "./hero.service";
 
 @Component({
     selector: 'my-heroes',
-    template: `
-        <h2>My Heroes</h2>
-        <ul class="heroes">
-            <li *ngFor="let hero of heroes" [class.selected]="hero === selectedHero" (click)="onSelect(hero)">
-                <span class="badge">{{hero.id}}</span> {{hero.name}}
-            </li>
-        </ul>
-        <my-hero-detail [hero]="selectedHero"></my-hero-detail>
-        `,
-    directives: [HeroDetailComponent],
+    templateUrl: 'app/heroes.component.html',
     providers: []
 })
 
@@ -24,7 +16,9 @@ export class HeroesComponent implements OnInit {
         this.getHeroes();
     }
 
-    constructor(private heroService: HeroService) {}
+    constructor(
+		private router: Router,
+		private heroService: HeroService) {}
     
     heroes: Hero[];
     
@@ -35,4 +29,8 @@ export class HeroesComponent implements OnInit {
     getHeroes() {
         this.heroService.getHeroes().then(heroes => this.heroes = heroes);
     };
+	
+	gotoDetail() {
+		this.router.navigate(['/detail', this.selectedHero.id]);
+	};
 }
